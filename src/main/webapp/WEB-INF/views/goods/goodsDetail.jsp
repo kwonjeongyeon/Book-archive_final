@@ -1,18 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8" 	isELIgnored="false"%>
-<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %>    
+	pageEncoding="utf-8" isELIgnored="false"%>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
-<c:set var="goods"  value="${goodsMap.goodsVO}"  />
-<c:set var="imageList"  value="${goodsMap.imageList }"  />
- <%
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:set var="goods" value="${goodsMap.goodsVO}" />
+<c:set var="imageList" value="${goodsMap.imageList }" />
+<%
      //치환 변수 선언합니다.
       //pageContext.setAttribute("crcn", "\r\n"); //개행문자
       pageContext.setAttribute("crcn" , "\n"); //Ajax로 변경 시 개행 문자 
       pageContext.setAttribute("br", "<br/>"); //br 태그
-%>  
+%>
 <html>
 <head>
 <style>
@@ -141,7 +141,7 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 		<h1>컴퓨터와 인터넷</h1>
 		<h2>국내외 도서 &gt; 컴퓨터와 인터넷 &gt; 웹 개발</h2>
 		<h3>${goods.goods_title }</h3>
-		<h4>${goods.goods_writer} &nbsp; 저| ${goods.goods_publisher}</h4>
+		<h4>${goods.goods_writer}&nbsp; 저| ${goods.goods_publisher}</h4>
 	</hgroup>
 	<div id="goods_image">
 		<figure>
@@ -154,31 +154,35 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 			<tbody>
 				<tr>
 					<td class="fixed">정가</td>
-					<td class="active"><span >
-					   <fmt:formatNumber  value="${goods.goods_price}" type="number" var="goods_price" />
-				         ${goods_price}원
+					<td class="active"><span> <fmt:formatNumber
+								value="${goods.goods_price}" type="number" var="goods_price" />
+							${goods_price}원
 					</span></td>
 				</tr>
 				<tr class="dot_line">
 					<td class="fixed">판매가</td>
-					<td class="active"><span >
-					   <fmt:formatNumber  value="${goods.goods_price*0.9}" type="number" var="discounted_price" />
-				         ${discounted_price}원(10%할인)</span></td>
+					<td class="active"><span> <fmt:formatNumber
+								value="${goods.goods_price*0.9}" type="number"
+								var="discounted_price" /> ${discounted_price}원(10%할인)
+					</span></td>
 				</tr>
 				<tr>
 					<td class="fixed">포인트적립</td>
-					<td class="active">${goods.goods_point}P(10%적립)</td>
+					<td class="active"><span> <fmt:formatNumber
+								value="${goods.goods_price*0.1}" type="number" var="goods_point" />
+							${goods.goods_point}P(10%적립)
+					</span></td>
 				</tr>
 				<tr class="dot_line">
 					<td class="fixed">포인트 추가적립</td>
-					<td class="fixed">만원이상 구매시 1,000P, 5만원이상 구매시 2,000P추가적립 편의점 배송 이용시 300P 추가적립</td>
+					<td class="fixed">만원이상 구매시 1,000P, 5만원이상 구매시 2,000P추가적립 편의점 배송
+						이용시 300P 추가적립</td>
 				</tr>
 				<tr>
 					<td class="fixed">발행일</td>
-					<td class="fixed">
-					   <c:set var="pub_date" value="${goods.goods_published_date}" />
-					   <c:set var="arr" value="${fn:split(pub_date,' ')}" />
-					   <c:out value="${arr[0]}" />
+					<td class="fixed"><c:set var="pub_date"
+							value="${goods.goods_published_date}" /> <c:set var="arr"
+							value="${fn:split(pub_date,' ')}" /> <c:out value="${arr[0]}" />
 					</td>
 				</tr>
 				<tr>
@@ -195,8 +199,8 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 				</tr>
 				<tr>
 					<td class="fixed">배송안내</td>
-					<td class="fixed"><strong>[당일배송]</strong> 당일배송 서비스 시작!<br> <strong>[휴일배송]</strong>
-						휴일에도 배송받는 Bookshop</TD>
+					<td class="fixed"><strong>[당일배송]</strong> 당일배송 서비스 시작!<br>
+						<strong>[휴일배송]</strong> 휴일에도 배송받는 Bookshop</TD>
 				</tr>
 				<tr>
 					<td class="fixed">도착예정일</td>
@@ -204,22 +208,25 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 				</tr>
 				<tr>
 					<td class="fixed">수량</td>
-					<td class="fixed">
-			      <select style="width: 60px;" id="order_goods_qty">
-				      <option>1</option>
+					<td class="fixed"><select style="width: 60px;"
+						id="order_goods_qty">
+							<option>1</option>
 							<option>2</option>
 							<option>3</option>
 							<option>4</option>
 							<option>5</option>
-			     </select>
-					 </td>
+					</select></td>
 				</tr>
 			</tbody>
 		</table>
-		<ul> <%-- 장바구니를 클릭하면 추가할 상품 번호를 함수로 전달 --%>
-			<li><a class="buy" href="javascript:fn_order_each_goods('${goods.goods_id }','${goods.goods_title }','${goods.goods_sales_price}','${goods.goods_fileName}');">구매하기 </a></li>
-			<li><a class="cart" href="javascript:add_cart('${goods.goods_id }')">장바구니</a></li>
-			
+		<ul>
+			<%-- 장바구니를 클릭하면 추가할 상품 번호를 함수로 전달 --%>
+			<li><a class="buy"
+				href="javascript:fn_order_each_goods('${goods.goods_id }','${goods.goods_title }','${goods.goods_sales_price}','${goods.goods_fileName}');">구매하기
+			</a></li>
+			<li><a class="cart"
+				href="javascript:add_cart('${goods.goods_id }')">장바구니</a></li>
+
 			<li><a class="wish" href="#">위시리스트</a></li>
 		</ul>
 	</div>
@@ -239,7 +246,7 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 				<h4>책소개</h4>
 				<p>${fn:replace(goods.goods_intro,crcn,br)}</p>
 				<c:forEach var="image" items="${imageList }">
-					<img 
+					<img
 						src="${contextPath}/download.do?goods_id=${goods.goods_id}&fileName=${image.fileName}">
 				</c:forEach>
 			</div>
@@ -247,16 +254,16 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 				<h4>저자소개</h4>
 				<p>
 				<div class="writer">저자 : ${goods.goods_writer}</div>
-				 <p>${fn:replace(goods.goods_writer_intro,crcn,br) }</p> 
-				
+				<p>${fn:replace(goods.goods_writer_intro,crcn,br) }</p>
+
 			</div>
 			<div class="tab_content" id="tab3">
 				<h4>책목차</h4>
-				<p>${fn:replace(goods.goods_contents_order,crcn,br)}</p> 
+				<p>${fn:replace(goods.goods_contents_order,crcn,br)}</p>
 			</div>
 			<div class="tab_content" id="tab4">
 				<h4>출판사서평</h4>
-				 <p>${fn:replace(goods.goods_publisher_comment ,crcn,br)}</p> 
+				<p>${fn:replace(goods.goods_publisher_comment ,crcn,br)}</p>
 			</div>
 			<div class="tab_content" id="tab5">
 				<h4>추천사</h4>
@@ -272,12 +279,15 @@ function fn_order_each_goods(goods_id,goods_title,goods_sales_price,fileName){
 		<!-- visibility:hidden 으로 설정하여 해당 div안의 모든것들을 가려둔다. -->
 		<div id="popup">
 			<!-- 팝업창 닫기 버튼 -->
-			<a href="javascript:" onClick="javascript:imagePopup('close', '.layer01');"> <img
+			<a href="javascript:"
+				onClick="javascript:imagePopup('close', '.layer01');"> <img
 				src="${contextPath}/resources/image/close.png" id="close" />
-			</a> <br/> <font size="10" id="contents">장바구니에 담았습니다.</font><br><br><br>
-<form   action='${contextPath}/cart/myCartList.do'  >				
-		<input  type="submit" value="장바구니 보기">
-</form>			
+			</a> <br /> <font size="10" id="contents">장바구니에 담았습니다.</font><br>
+			<br>
+			<br>
+			<form action='${contextPath}/cart/myCartList.do'>
+				<input type="submit" value="장바구니 보기">
+			</form>
 </body>
 </html>
-<input type="hidden" name="isLogOn" id="isLogOn" value="${isLogOn}"/>
+<input type="hidden" name="isLogOn" id="isLogOn" value="${isLogOn}" />
