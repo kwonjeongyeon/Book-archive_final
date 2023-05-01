@@ -15,7 +15,7 @@
 	<li class="no_line"><a href="#">찾아오시는길</a></li>
 </ul>
 <div class="clear"></div>
-<a href="#"><img width="180px"  height="52px" alt="Bookarchive" src="${contextPath}/resources/image/bookarchive.PNG" /></a>
+<a href="#"><img width="210px"  height="52px" alt="Bookarchive" src="${contextPath}/resources/image/bookarchive.PNG" /></a>
 <div style="padding-left:200px">
 	Book:archive <br>
 	 주소 : 우편번호 03133 서울시 종로구 종로3 <br>  
