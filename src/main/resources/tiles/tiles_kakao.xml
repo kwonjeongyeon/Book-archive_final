@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+	<!-- 주문 결과 표시 -->
+	<definition name="/kakao/kakaoResult" extends="baseLayout">
+		<put-attribute name="title" value="카카오 결제 성공" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/kakao/KakaoResult.jsp" />
+	</definition>
+
+	<definition name="/kakao/kakaoResultFail"
+		extends="baseLayout">
+		<put-attribute name="title" value="카카오 결제 실패" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/kakao/KakaoResultFail.jsp" />
+	</definition>
+
+</tiles-definitions>
+
+

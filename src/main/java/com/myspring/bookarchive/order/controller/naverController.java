@@ -1,35 +1,22 @@
 package com.myspring.bookarchive.order.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.myspring.bookarchive.goods.vo.GoodsVO;
-import com.myspring.bookarchive.member.vo.MemberVO;
 import com.myspring.bookarchive.order.service.ApiService;
-import com.myspring.bookarchive.order.service.OrderService;
-import com.myspring.bookarchive.order.vo.OrderVO;
 
 @RestController
-public class KakaoController { // @RestController : view의 기능이 없음
+public class naverController { // @RestController : view의 기능이 없음
 
 	@Autowired
 	private ApiService apiService;
 
-	@RequestMapping(value = "/test/kakaoOrder.do")
+	@RequestMapping(value = "/test/naverOrder.do")
 	public Map<String, Object> kakaoOrder(@RequestParam Map<String, String> dateMap) throws Exception {
 
 		System.out.println("들어오는 데이터 = " + dateMap.toString());
@@ -46,6 +33,7 @@ public class KakaoController { // @RestController : view의 기능이 없음
 		String signature = "";
 		String timestamp = "";
 		String userAgent = "";
+		String payType = "";
 		// userAgent(사용자환경), 꼭 WP로 보내야함 (모바일 : WM, PC:WP)
 
 		// 값 세팅
@@ -57,6 +45,7 @@ public class KakaoController { // @RestController : view의 기능이 없음
 		userName = "홍지수";
 		userAgent = "WP";
 		returnUrl = "http://localhost:8080/bookarchive/main/main.do";
+		payType = "CARD";
 		timestamp = "20230501150526";
 		signature = apiService
 				.encrypt(merchantId + "|" + orderNumber + "|" + amount + "|" + apiCertKey + "|" + timestamp); // 서명값
@@ -65,7 +54,7 @@ public class KakaoController { // @RestController : view의 기능이 없음
 		// 암호화 값을 만든다 => 통신상 암호화해서 보낸다음 서로 더블체크 (결제 위변조 방지를 위한 파라미터), 가장 기본적인 위변조 방지 기술
 
 		// 주문 연동하기
-		String url = "https://api.testpayup.co.kr/ep/api/kakao/" + merchantId + "/order";
+		String url = "https://api.testpayup.co.kr/ep/api/naver/" + merchantId + "/order";
 		Map<String, String> map = new HashMap<String, String>();
 
 		// map에 요청데이터값들을 넣기
@@ -76,6 +65,7 @@ public class KakaoController { // @RestController : view의 기능이 없음
 		map.put("userName", userName);
 		map.put("returnUrl", returnUrl);
 		map.put("userAgent", userAgent);
+		map.put("payType", payType);
 		map.put("timestamp", timestamp);
 		map.put("signature", signature);
 

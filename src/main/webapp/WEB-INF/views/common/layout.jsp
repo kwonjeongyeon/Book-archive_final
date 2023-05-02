@@ -54,7 +54,7 @@
 				 <tiles:insertAttribute name="side" />
 			</aside>
 			<article>
-			 	<tiles:insertAttribute name="body" />
+			 	<tiles:insertAttribute name="body" ignore="true" />
 			</article>
 			<div class="clear"></div>
 			<footer>
